@@ -72,7 +72,7 @@ let pulseEnabled = true;
 
 map.on('load', () => {
   // Initially add pulse layer
-  addPulseLayer();
+  // addPulseLayer();
 
   // Toggle checkbox listener
   document.getElementById('toggle-pulse').addEventListener('change', function () {
