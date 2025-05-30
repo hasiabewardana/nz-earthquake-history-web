@@ -132,9 +132,14 @@ function updateFilters() {
   const region = regionFilter.value;
   let filter = ['all', true];
   if (mag !== 'all') {
-    const [min, max] = mag.split('-').map(Number) || [Number(mag.replace('+', '')), 10];
-    filter = ['all', filter, ['>=', ['get', 'magnitude'], min]];
-    if (max) filter = ['all', filter, ['<=', ['get', 'magnitude'], max]];
+    if (mag.includes('+')) {
+      const min = parseFloat(mag.replace('+', ''));
+      filter.push(['>=', ['get', 'magnitude'], min]);
+    } else {
+      const [min, max] = mag.split('-').map(parseFloat);
+      filter.push(['>=', ['get', 'magnitude'], min]);
+      filter.push(['<=', ['get', 'magnitude'], max]);
+    }
   }
   if (depth !== 'all') {
     const [min, max] = depth.split('-').map(Number) || [Number(depth.replace('+', '')), 1000];

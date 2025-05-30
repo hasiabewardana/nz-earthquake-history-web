@@ -34,7 +34,7 @@ body {
 
 .filters-container {
     display: flex;
-    gap: 5rem;
+    gap: 4rem;
     align-items: center;
     flex-wrap: wrap;
     /* optional, for responsiveness */
