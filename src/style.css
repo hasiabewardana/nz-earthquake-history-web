@@ -1,0 +1,5 @@
+body { margin: 0; padding: 0; font-family: Calibri, sans-serif; }
+#map { position: absolute; top: 0; bottom: 0; width: 70%; }
+#controls { position: absolute; top: 10px; right: 10px; width: 28%; background: #fff; padding: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+#controls label, #controls select, #controls button { display: block; margin: 10px 0; }
+#year-slider { width: 100%; }

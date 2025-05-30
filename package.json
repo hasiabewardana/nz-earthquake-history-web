@@ -1,0 +1,16 @@
+{
+  "name": "nz-earthquake-history-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mapbox-gl": "^3.11.1"
+  }
+}
