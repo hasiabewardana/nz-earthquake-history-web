@@ -154,9 +154,9 @@ function updateFilters() {
       filter.push(['<', ['get', 'depth'], max]);
     }
   }
-  if (region !== 'all') {
+  /* if (region !== 'all') {
     filter = ['all', filter, ['==', ['get', 'Region'], region]];
-  }
+  } */
   map.setFilter('earthquakes-layer', filter);
   map.setFilter('major-earthquakes-layer', filter);
   if (region === 'Northland') map.flyTo({ center: [173.88, -35.57], zoom: 7 });
