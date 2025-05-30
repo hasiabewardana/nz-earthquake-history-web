@@ -159,10 +159,23 @@ function updateFilters() {
   }
   map.setFilter('earthquakes-layer', filter);
   map.setFilter('major-earthquakes-layer', filter);
-  if (region === 'Taranaki') map.flyTo({ center: [174.07, -39.06], zoom: 8 });
-  else if (region === 'Canterbury') map.flyTo({ center: [172.64, -43.53], zoom: 8 });
+  if (region === 'Northland') map.flyTo({ center: [173.88, -35.57], zoom: 7 });
+  else if (region === 'Auckland') map.flyTo({ center: [174.76, -36.85], zoom: 8 });
+  else if (region === 'Waikato') map.flyTo({ center: [175.28, -37.78], zoom: 8 });
+  else if (region === 'Bay of Plenty') map.flyTo({ center: [176.25, -38.15], zoom: 8 });
+  else if (region === 'Gisborne') map.flyTo({ center: [178.02, -38.66], zoom: 8 });
+  else if (region === 'Hawkes Bay') map.flyTo({ center: [176.84, -39.49], zoom: 8 });
+  else if (region === 'Taranaki') map.flyTo({ center: [174.07, -39.06], zoom: 8 });
+  else if (region === 'Manawatu-Whanganui') map.flyTo({ center: [175.51, -39.92], zoom: 8 });
   else if (region === 'Wellington') map.flyTo({ center: [174.78, -41.29], zoom: 8 });
-  else map.flyTo({ center: [174.886, -41.286], zoom: 4 });
+  else if (region === 'Tasman') map.flyTo({ center: [172.62, -41.30], zoom: 8 });
+  else if (region === 'Nelson') map.flyTo({ center: [173.28, -41.27], zoom: 9 });
+  else if (region === 'Marlborough') map.flyTo({ center: [173.95, -41.58], zoom: 8 });
+  else if (region === 'West Coast') map.flyTo({ center: [171.21, -42.45], zoom: 8 });
+  else if (region === 'Canterbury') map.flyTo({ center: [172.64, -43.53], zoom: 8 });
+  else if (region === 'Otago') map.flyTo({ center: [169.72, -45.52], zoom: 8 });
+  else if (region === 'Southland') map.flyTo({ center: [168.87, -46.41], zoom: 8 });
+  else map.flyTo({ center: [174.886, -41.286], zoom: 4 });  // Default view (NZ)
 }
 magFilter.addEventListener('change', updateFilters);
 depthFilter.addEventListener('change', updateFilters);
