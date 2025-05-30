@@ -48,7 +48,7 @@ map.on('load', () => {
     type: 'circle',
     source: 'major-earthquakes',
     paint: {
-      'circle-radius': 20,
+      'circle-radius': ['interpolate', ['linear'], ['get', 'magnitude'], 7, 15, 10, 40],
       'circle-color': '#ff0000',
       'circle-stroke-color': '#ffffff',
       'circle-stroke-width': 2
