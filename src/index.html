@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Visualising NZ Earthquake History</title>
   <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.0/mapbox-gl.js'></script>
@@ -7,34 +8,43 @@
   <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
   <link rel='stylesheet' href='style.css' />
 </head>
+
 <body>
   <div id='map'></div>
   <div id='controls'>
     <label for='year-slider'>Year: <span id='year-display'>1900</span></label>
     <input type='range' id='year-slider' min='1900' max='2025' value='1900'>
     <canvas id='timeline-chart' style='width: 100%; height: 100px;'></canvas>
-    <label for='mag-filter'>Magnitude:</label>
-    <select id='mag-filter'>
-      <option value='all'>All</option>
-      <option value='3-5'>3–5</option>
-      <option value='5-6'>5–6</option>
-      <option value='6+'>6+</option>
-    </select>
-    <label for='depth-filter'>Depth (km):</label>
-    <select id='depth-filter'>
-      <option value='all'>All</option>
-      <option value='0-10'>0–10</option>
-      <option value='10-50'>10–50</option>
-      <option value='50+'>50+</option>
-    </select>
-    <label for='region-filter'>Region:</label>
-    <select id='region-filter'>
-      <option value='all'>All</option>
-      <option value='Taranaki'>Taranaki</option>
-      <option value='Canterbury'>Canterbury</option>
-      <option value='Wellington'>Wellington</option>
-      <!-- Add other regions -->
-    </select>
+    <div class="filters-container">
+      <div class="filter-group">
+        <label for='mag-filter'>Magnitude:</label>
+        <select id='mag-filter'>
+          <option value='all'>All</option>
+          <option value='3-5'>3–5</option>
+          <option value='5-6'>5–6</option>
+          <option value='6+'>6+</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for='depth-filter'>Depth (km):</label>
+        <select id='depth-filter'>
+          <option value='all'>All</option>
+          <option value='0-10'>0–10</option>
+          <option value='10-50'>10–50</option>
+          <option value='50+'>50+</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for='region-filter'>Region:</label>
+        <select id='region-filter'>
+          <option value='all'>All</option>
+          <option value='Taranaki'>Taranaki</option>
+          <option value='Canterbury'>Canterbury</option>
+          <option value='Wellington'>Wellington</option>
+          <!-- Add other regions -->
+        </select>
+      </div>
+    </div>
     <button id='reset'>Reset Filters</button>
     <label>
       <input type="checkbox" id="toggle-pulse" checked>
@@ -43,4 +53,5 @@
   </div>
   <script src='script.js'></script>
 </body>
+
 </html>
