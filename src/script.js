@@ -145,9 +145,14 @@ function updateFilters() {
     }
   }
   if (depth !== 'all') {
-    const [min, max] = depth.split('-').map(Number) || [Number(depth.replace('+', '')), 1000];
-    filter = ['all', filter, ['>=', ['get', 'depth'], min]];
-    if (max) filter = ['all', filter, ['<=', ['get', 'depth'], max]];
+    if (depth.includes('+')) {
+      const min = parseFloat(depth.replace('+', ''));
+      filter.push(['>=', ['get', 'depth'], min]);
+    } else {
+      const [min, max] = depth.split('-').map(parseFloat);
+      filter.push(['>=', ['get', 'depth'], min]);
+      filter.push(['<', ['get', 'depth'], max]);
+    }
   }
   if (region !== 'all') {
     filter = ['all', filter, ['==', ['get', 'Region'], region]];
