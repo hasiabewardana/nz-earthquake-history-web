@@ -18,8 +18,8 @@ map.on('load', () => {
     type: 'circle',
     source: 'earthquakes',
     paint: {
-      'circle-radius': ['interpolate', ['linear'], ['get', 'magnitude'], 3, 5, 8, 15],
-      'circle-color': ['interpolate', ['linear'], ['get', 'depth'], 0, '#0000ff', 100, '#ff0000'],
+      'circle-radius': ['interpolate', ['linear'], ['get', 'magnitude'], 3, 3, 10, 10],
+      'circle-color': ['interpolate', ['linear'], ['get', 'depth'], 0, '#00ffcc', 100, '#008066'],
       'circle-opacity': 0.8
     }
   });
@@ -67,21 +67,60 @@ slider.addEventListener('input', () => {
 });
 
 // Pulse animation
+let pulseInterval;
+let pulseEnabled = true;
+
 map.on('load', () => {
-  map.addLayer({
-    id: 'earthquakes-pulse',
-    type: 'circle',
-    source: 'earthquakes',
-    paint: {
-      'circle-radius': ['interpolate', ['linear'], ['get', 'magnitude'], 3, 10, 8, 20],
-      'circle-opacity': 0.8,
-      'circle-color': '#ff0000'
+  // Initially add pulse layer
+  addPulseLayer();
+
+  // Toggle checkbox listener
+  document.getElementById('toggle-pulse').addEventListener('change', function () {
+    pulseEnabled = this.checked;
+    if (pulseEnabled) {
+      addPulseLayer();
+    } else {
+      removePulseLayer();
     }
   });
-  setInterval(() => {
-    map.setPaintProperty('earthquakes-pulse', 'circle-opacity', Math.random() * 0.8);
-  }, 500);
 });
+
+function addPulseLayer() {
+  if (!map.getLayer('earthquakes-pulse')) {
+    map.addLayer({
+      id: 'earthquakes-pulse',
+      type: 'circle',
+      source: 'earthquakes',
+      paint: {
+        'circle-radius': ['interpolate', ['linear'], ['get', 'magnitude'], 3, 5, 10, 12],
+        'circle-opacity': 0.8,
+        'circle-color': '#004d3d'
+      }
+    });
+  }
+
+  startPulseAnimation();
+}
+
+function startPulseAnimation() {
+  stopPulseAnimation(); // Clear any existing interval
+  pulseInterval = setInterval(() => {
+    if (map.getLayer('earthquakes-pulse')) {
+      map.setPaintProperty('earthquakes-pulse', 'circle-opacity', Math.random() * 0.8);
+    }
+  }, 500);
+}
+
+function stopPulseAnimation() {
+  clearInterval(pulseInterval);
+}
+
+function removePulseLayer() {
+  stopPulseAnimation();
+  if (map.getLayer('earthquakes-pulse')) {
+    map.removeLayer('earthquakes-pulse');
+  }
+}
 
 // Filters
 const magFilter = document.getElementById('mag-filter');
