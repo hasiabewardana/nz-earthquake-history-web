@@ -20,7 +20,9 @@ map.on('load', () => {
     paint: {
       'circle-radius': ['interpolate', ['linear'], ['get', 'magnitude'], 3, 3, 10, 10],
       'circle-color': ['interpolate', ['linear'], ['get', 'depth'], 0, '#00ffcc', 100, '#008066'],
-      'circle-opacity': 0.8
+      'circle-opacity': 0.8,
+      'circle-stroke-color': '#006652',
+      'circle-stroke-width': 1
     }
   });
   // Regional boundaries
@@ -50,8 +52,9 @@ map.on('load', () => {
     paint: {
       'circle-radius': ['interpolate', ['linear'], ['get', 'magnitude'], 7, 15, 10, 40],
       'circle-color': '#ff0000',
-      'circle-stroke-color': '#ffffff',
-      'circle-stroke-width': 2
+      'circle-opacity': 0.8,
+      'circle-stroke-color': '#660000',
+      'circle-stroke-width': 1
     }
   });
 });
@@ -138,7 +141,7 @@ function updateFilters() {
     } else {
       const [min, max] = mag.split('-').map(parseFloat);
       filter.push(['>=', ['get', 'magnitude'], min]);
-      filter.push(['<=', ['get', 'magnitude'], max]);
+      filter.push(['<', ['get', 'magnitude'], max]);
     }
   }
   if (depth !== 'all') {
@@ -199,7 +202,7 @@ fetch('/data/quake_frequency.csv')
       type: 'bar',
       data: {
         labels: years,
-        datasets: [{ label: 'Quake Frequency', data: counts, backgroundColor: '#ff0000' }]
+        datasets: [{ label: 'Quake Frequency', data: counts, backgroundColor: '#cc3300' }]
       },
       options: { scales: { y: { beginAtZero: true } } }
     });
