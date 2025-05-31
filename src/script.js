@@ -18,7 +18,17 @@ map.on('load', () => {
     type: 'circle',
     source: 'earthquakes',
     paint: {
-      'circle-radius': ['interpolate', ['linear'], ['get', 'magnitude'], 3, 3, 10, 10],
+      'circle-radius': [
+        'step',
+        ['get', 'magnitude'],
+        3,   // default for magnitudes < 3
+        3, 4, // mag >= 3 → radius 4
+        4, 6, // mag >= 4 → radius 6
+        5, 8, // mag >= 5 → radius 8
+        6, 10, // mag >= 6 → radius 10
+        7, 12, // mag >= 7 → radius 12
+        8, 14  // mag >= 8 → radius 14
+      ],
       'circle-color': ['interpolate', ['linear'], ['get', 'depth'], 0, '#00ffcc', 100, '#008066'],
       'circle-opacity': 0.8,
       'circle-stroke-color': '#006652',
