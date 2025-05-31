@@ -73,8 +73,21 @@ map.on('load', () => {
       'circle-opacity': 0.8,
       'circle-stroke-color': '#660000',
       'circle-stroke-width': 1
-    }
+    },
+    layout: { visibility: 'none' }
   });
+});
+
+// Major earthquakes visiility
+const toggleMajor = document.getElementById('toggle-major-quakes');
+toggleMajor.addEventListener('change', () => {
+  if (toggleMajor.checked) {
+    map.setLayoutProperty('major-earthquakes-layer', 'visibility', 'visible');
+    map.setLayoutProperty('earthquakes-layer', 'visibility', 'none');
+  } else {
+    map.setLayoutProperty('major-earthquakes-layer', 'visibility', 'none');  // optional: hide if you want
+    map.setLayoutProperty('earthquakes-layer', 'visibility', 'visible');
+  }
 });
 
 // Timeline slider
@@ -244,6 +257,10 @@ document.getElementById('reset').addEventListener('click', () => {
   regionFilter.value = 'all';
   slider.value = 2025;
   yearDisplay.textContent = 2025;
+  document.getElementById('year-mode-toggle').checked = false;
+  document.getElementById('toggle-major-quakes').checked = false;
+  map.setLayoutProperty('major-earthquakes-layer', 'visibility', 'none');
+  map.setLayoutProperty('earthquakes-layer', 'visibility', 'visible');
   updateFilters();
 });
 
