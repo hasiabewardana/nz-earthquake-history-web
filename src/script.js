@@ -190,6 +190,9 @@ function updateFilters() {
   const mag = magFilter.value;
   const depth = depthFilter.value;
   const region = regionFilter.value;
+  const year = parseInt(slider.value);
+  const onlySelectedYear = yearToggle.checked;
+  yearDisplay.textContent = year;
   let filter = ['all', true];
   if (mag !== 'all') {
     if (mag.includes('+')) {
@@ -214,8 +217,7 @@ function updateFilters() {
   /* if (region !== 'all') {
     filter = ['all', filter, ['==', ['get', 'Region'], region]];
   } */
-  map.setFilter('earthquakes-layer', filter);
-  map.setFilter('major-earthquakes-layer', filter);
+  
   if (region === 'Northland') map.flyTo({ center: [173.88, -35.57], zoom: 7 });
   else if (region === 'Auckland') map.flyTo({ center: [174.76, -36.85], zoom: 8 });
   else if (region === 'Waikato') map.flyTo({ center: [175.28, -37.78], zoom: 8 });
@@ -233,6 +235,17 @@ function updateFilters() {
   else if (region === 'Otago') map.flyTo({ center: [169.72, -45.52], zoom: 8 });
   else if (region === 'Southland') map.flyTo({ center: [168.87, -46.41], zoom: 8 });
   else map.flyTo({ center: [174.886, -41.286], zoom: 4 });  // Default view (NZ)
+
+  // --- Year (origintime) filter ---
+  if (onlySelectedYear) {
+    filter.push(['>=', ['get', 'origintime'], `${year}-01-01`]);
+    filter.push(['<=', ['get', 'origintime'], `${year}-12-31`]);
+  } else {
+    filter.push(['<=', ['get', 'origintime'], `${year}-12-31`]);
+  }
+
+  map.setFilter('earthquakes-layer', filter);
+  map.setFilter('major-earthquakes-layer', filter);
 }
 magFilter.addEventListener('change', updateFilters);
 depthFilter.addEventListener('change', updateFilters);
