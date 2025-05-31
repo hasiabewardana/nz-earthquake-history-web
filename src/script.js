@@ -263,10 +263,15 @@ document.getElementById('reset').addEventListener('click', () => {
   regionFilter.value = 'all';
   slider.value = 2025;
   yearDisplay.textContent = 2025;
+  document.getElementById('toggle-pulse').checked = false;
   document.getElementById('year-mode-toggle').checked = false;
   document.getElementById('toggle-major-quakes').checked = false;
   map.setLayoutProperty('major-earthquakes-layer', 'visibility', 'none');
   map.setLayoutProperty('earthquakes-layer', 'visibility', 'visible');
+  // Disable pulsing by reverting the paint/style (if needed)
+  if (map.getLayer('earthquakes-pulse')) {
+    map.removeLayer('earthquakes-pulse');
+  }
   updateFilters();
 });
 
