@@ -101,8 +101,14 @@ const slider = document.getElementById('year-slider');
 const yearDisplay = document.getElementById('year-display');
 const yearToggle = document.getElementById('year-mode-toggle');
 
-slider.addEventListener('input', updateYearFilter);
-yearToggle.addEventListener('change', updateYearFilter);
+slider.addEventListener('input', () => {
+  updateYearFilter();
+  updateFilters();  // Call your additional function here
+});
+yearToggle.addEventListener('change', () => {
+  updateYearFilter();
+  updateFilters(); // Call your additional function here
+});
 
 function updateYearFilter() {
   const year = slider.value;
