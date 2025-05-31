@@ -262,7 +262,7 @@ map.on('click', ['earthquakes-layer', 'major-earthquakes-layer'], (e) => {
   const props = e.features[0].properties;
   new mapboxgl.Popup()
     .setLngLat(e.lngLat)
-    .setHTML(`<h3>M${props.magnitude}</h3><p>Date: ${props.origintime}<br>Depth: ${props.depth}km<br>Region: ${props.Region || 'Unknown'}</p>`)
+    .setHTML(`<h3>Date: ${props.origintime}</h3><p>Magnitude: ${props.magnitude}<br>Depth: ${props.depth}km</p>`)
     .addTo(map);
 });
 map.on('mouseenter', ['earthquakes-layer', 'major-earthquakes-layer'], () => {
