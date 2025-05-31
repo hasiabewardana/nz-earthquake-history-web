@@ -29,9 +29,17 @@ map.on('load', () => {
         7, 12, // mag >= 7 → radius 12
         8, 14  // mag >= 8 → radius 14
       ],
-      'circle-color': ['interpolate', ['linear'], ['get', 'depth'], 0, '#00ffcc', 100, '#008066'],
+      'circle-color': [
+        'step',
+        ['get', 'depth'],
+        '#00ffcc',   // 0–15 km
+        15, '#00e6b8', // 15–40 km
+        40, '#00cca3', // 40–100 km
+        100, '#00b38f', // 100–200 km
+        200, '#00997a'  // 200+ km
+      ],
       'circle-opacity': 0.8,
-      'circle-stroke-color': '#006652',
+      'circle-stroke-color': '#008066',
       'circle-stroke-width': 1
     }
   });
