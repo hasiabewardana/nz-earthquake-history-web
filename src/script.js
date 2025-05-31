@@ -62,12 +62,32 @@ map.on('load', () => {
 // Timeline slider
 const slider = document.getElementById('year-slider');
 const yearDisplay = document.getElementById('year-display');
-slider.addEventListener('input', () => {
+const yearToggle = document.getElementById('year-mode-toggle');
+
+slider.addEventListener('input', updateYearFilter);
+yearToggle.addEventListener('change', updateYearFilter);
+
+function updateYearFilter() {
   const year = slider.value;
+  const onlySelectedYear = yearToggle.checked;
   yearDisplay.textContent = year;
-  map.setFilter('earthquakes-layer', ['<=', ['get', 'origintime'], `${year}-12-31`]);
-  map.setFilter('major-earthquakes-layer', ['<=', ['get', 'origintime'], `${year}-12-31`]);
-});
+
+  let filter;
+  if (onlySelectedYear) {
+    // Show earthquakes from exactly the selected year
+    filter = [
+      'all',
+      ['>=', ['get', 'origintime'], `${year}-01-01`],
+      ['<=', ['get', 'origintime'], `${year}-12-31`]
+    ];
+  } else {
+    // Show earthquakes up to and including the selected year
+    filter = ['<=', ['get', 'origintime'], `${year}-12-31`];
+  }
+
+  map.setFilter('earthquakes-layer', filter);
+  map.setFilter('major-earthquakes-layer', filter);
+}
 
 // Pulse animation
 let pulseInterval;
