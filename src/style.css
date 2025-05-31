@@ -55,3 +55,54 @@ body {
     padding: 0.3rem;
     font-size: 0.95rem;
 }
+
+.legend-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    max-width: 500px;
+    flex-wrap: wrap; /* ensures it wraps if screen is small */
+  }
+  
+  .legend-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .legend-section strong {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  
+  .legend-circle {
+    background-color: white;
+    border: 1px solid #008066;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  
+  .legend-color {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #006652;
+    border-radius: 3px;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  
+  .legend-label {
+    font-size: 14px;
+  }

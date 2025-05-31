@@ -12,7 +12,7 @@
 <body>
   <div id='map'></div>
   <div id='controls'>
-    <canvas id='timeline-chart' style='width: 100%; height: 300px;'></canvas>
+    <canvas id='timeline-chart' style='width: 100%; height: 160px;'></canvas>
     <label for='year-slider'>Year: <span id='year-display'>2025</span></label>
     <input type='range' id='year-slider' min='1900' max='2025' value='2025'>
     <label>
@@ -68,13 +68,72 @@
     </div>
     <label>
       <input type="checkbox" id="toggle-major-quakes">
-      Only Major Earthquakes
+      Only Major Earthquakes (>=7)
     </label>
-    <button id='reset'>Reset Filters</button>
     <label>
       <input type="checkbox" id="toggle-pulse" unchecked>
       Pulse Animation
     </label>
+    <button id='reset'>Reset Filters</button>
+    <div class="legend-container">
+      <!-- Magnitude legend -->
+      <div class="legend-section">
+        <strong>Magnitude (Circle Size)</strong>
+        <div class="legend-item">
+          <div class="legend-circle" style="width: 28px; height: 28px;"></div>
+          <div class="legend-label">8.0+</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-circle" style="width: 24px; height: 24px;"></div>
+          <div class="legend-label">7.0–7.9</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-circle" style="width: 20px; height: 20px;"></div>
+          <div class="legend-label">6.0–6.9</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-circle" style="width: 16px; height: 16px;"></div>
+          <div class="legend-label">5.0–5.9</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-circle" style="width: 12px; height: 12px;"></div>
+          <div class="legend-label">4.0–4.9</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-circle" style="width: 8px; height: 8px;"></div>
+          <div class="legend-label">3.0–3.9</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-circle" style="width: 6px; height: 6px;"></div>
+          <div class="legend-label">0.0–3.0</div>
+        </div>
+      </div>
+    
+      <!-- Depth legend -->
+      <div class="legend-section">
+        <strong>Depth (Circle Color)</strong>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #00ffcc;"></div>
+          <div class="legend-label">0–15 km</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #00e6b8;"></div>
+          <div class="legend-label">15–40 km</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #00cca3;"></div>
+          <div class="legend-label">40–100 km</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #00b38f;"></div>
+          <div class="legend-label">100–200 km</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #00997a;"></div>
+          <div class="legend-label">200+ km</div>
+        </div>
+      </div>
+    </div>
   </div>
   <script src='script.js'></script>
 </body>
