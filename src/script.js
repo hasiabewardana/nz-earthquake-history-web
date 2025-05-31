@@ -224,8 +224,8 @@ document.getElementById('reset').addEventListener('click', () => {
   magFilter.value = 'all';
   depthFilter.value = 'all';
   regionFilter.value = 'all';
-  slider.value = 1900;
-  yearDisplay.textContent = 1900;
+  slider.value = 2025;
+  yearDisplay.textContent = 2025;
   updateFilters();
 });
 
