@@ -55,7 +55,7 @@ map.on('load', () => {
     source: 'regions',
     paint: {
       'fill-color': '#888888',
-      'fill-opacity': 0.4,
+      'fill-opacity': 0.2,
       'fill-outline-color': '#000000'
     }
   });
