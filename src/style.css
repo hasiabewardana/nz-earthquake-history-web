@@ -78,7 +78,7 @@ body {
   max-width: 500px;
   flex-wrap: wrap;
   /* ensures it wraps if screen is small */
-  font-size: 0.85rem;
+  font-size: 0.8rem;
 }
 
 .legend-section {
@@ -115,5 +115,5 @@ body {
 }
 
 .legend-label {
-  font-size: 14px;
+  font-size: 0.8rem;
 }
