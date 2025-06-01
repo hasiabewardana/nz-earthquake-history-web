@@ -4,3 +4,6 @@ This project builds an interactive web-based visualization of New Zealand’s ea
 ## 🌐 Live Demo
 You can visit our visualisation prototype here:  
 👉 [https://nz-earthquake-history-web.onrender.com](https://nz-earthquake-history-web.onrender.com)
+
+## 🎥 Video Demo:  
+👉 [View Video Demo](https://github.com/hasiabewardana/nz-earthquake-history-web/blob/main/public/Demo-NZ_Earthquake_History-TB.mp4)
