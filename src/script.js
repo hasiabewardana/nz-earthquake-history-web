@@ -38,11 +38,12 @@ map.on('load', () => {
         100, '#00b38f', // 100–200 km
         200, '#00997a'  // 200+ km
       ],
-      'circle-opacity': 0.8,
+      'circle-opacity': 1,
       'circle-stroke-color': '#008066',
       'circle-stroke-width': 1
     }
   });
+
   // Regional boundaries
   map.addSource('regions', {
     type: 'geojson',
@@ -69,18 +70,73 @@ map.on('load', () => {
     source: 'major-earthquakes',
     paint: {
       'circle-radius': [
-        'step', 
-        ['get', 'magnitude'], 
+        'step',
+        ['get', 'magnitude'],
         12,
-        7, 12, 
+        7, 12,
         8, 14
       ],
       'circle-color': '#ff0000',
-      'circle-opacity': 0.8,
+      'circle-opacity': 1,
       'circle-stroke-color': '#660000',
       'circle-stroke-width': 1
     },
     layout: { visibility: 'none' }
+  });
+
+  let pulseInterval;
+  const togglePulse = document.getElementById('toggle-pulse');
+  const toggleMajor = document.getElementById('toggle-major-quakes');
+
+  function startPulse() {
+    clearInterval(pulseInterval); // clear any existing interval to prevent duplicates
+
+    if (toggleMajor.checked) {
+      pulseInterval = setInterval(() => {
+        if (map.getLayer('major-earthquakes-layer')) {
+          map.setPaintProperty('major-earthquakes-layer', 'circle-opacity', Math.random() * 1);
+        }
+      }, 500);
+    } else {
+      pulseInterval = setInterval(() => {
+        if (map.getLayer('earthquakes-layer')) {
+          map.setPaintProperty('earthquakes-layer', 'circle-opacity', Math.random() * 1);
+        }
+      }, 500);
+    }
+  }
+
+  function stopPulse() {
+    clearInterval(pulseInterval);
+
+    // Restore default opacity
+    if (toggleMajor.checked) {
+      if (map.getLayer('major-earthquakes-layer')) {
+        map.setPaintProperty('major-earthquakes-layer', 'circle-opacity', 1);
+      }
+    } else {
+      if (map.getLayer('earthquakes-layer')) {
+        map.setPaintProperty('earthquakes-layer', 'circle-opacity', 1);
+      }
+    }
+  }
+
+  // Toggle pulse checkbox listener
+  togglePulse.addEventListener('change', () => {
+    if (togglePulse.checked) {
+      startPulse();
+    } else {
+      stopPulse();
+    }
+  });
+
+  // Toggle major checkbox listener
+  toggleMajor.addEventListener('change', () => {
+    if (togglePulse.checked) {
+      startPulse(); // Restart pulse for the correct layer
+    } else {
+      stopPulse();  // Restore original style
+    }
   });
 });
 
@@ -132,62 +188,6 @@ function updateYearFilter() {
   map.setFilter('major-earthquakes-layer', filter);
 }
 
-// Pulse animation
-let pulseInterval;
-let pulseEnabled = true;
-
-map.on('load', () => {
-  // Initially add pulse layer
-  // addPulseLayer();
-
-  // Toggle checkbox listener
-  document.getElementById('toggle-pulse').addEventListener('change', function () {
-    pulseEnabled = this.checked;
-    if (pulseEnabled) {
-      addPulseLayer();
-    } else {
-      removePulseLayer();
-    }
-  });
-});
-
-function addPulseLayer() {
-  if (!map.getLayer('earthquakes-pulse')) {
-    map.addLayer({
-      id: 'earthquakes-pulse',
-      type: 'circle',
-      source: 'earthquakes',
-      paint: {
-        'circle-radius': ['interpolate', ['linear'], ['get', 'magnitude'], 3, 5, 10, 12],
-        'circle-opacity': 0.8,
-        'circle-color': '#004d3d'
-      }
-    });
-  }
-
-  startPulseAnimation();
-}
-
-function startPulseAnimation() {
-  stopPulseAnimation(); // Clear any existing interval
-  pulseInterval = setInterval(() => {
-    if (map.getLayer('earthquakes-pulse')) {
-      map.setPaintProperty('earthquakes-pulse', 'circle-opacity', Math.random() * 0.8);
-    }
-  }, 500);
-}
-
-function stopPulseAnimation() {
-  clearInterval(pulseInterval);
-}
-
-function removePulseLayer() {
-  stopPulseAnimation();
-  if (map.getLayer('earthquakes-pulse')) {
-    map.removeLayer('earthquakes-pulse');
-  }
-}
-
 // Filters
 const magFilter = document.getElementById('mag-filter');
 const depthFilter = document.getElementById('depth-filter');
@@ -220,10 +220,11 @@ function updateFilters() {
       filter.push(['<', ['get', 'depth'], max]);
     }
   }
+
   /* if (region !== 'all') {
     filter = ['all', filter, ['==', ['get', 'Region'], region]];
   } */
-  
+
   if (region === 'Northland') map.flyTo({ center: [173.88, -35.57], zoom: 7 });
   else if (region === 'Auckland') map.flyTo({ center: [174.76, -36.85], zoom: 8 });
   else if (region === 'Waikato') map.flyTo({ center: [175.28, -37.78], zoom: 8 });
