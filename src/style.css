@@ -87,7 +87,7 @@ body {
 }
 
 .legend-section strong {
-  text-align: center;
+  text-align: left;
   margin-bottom: 10px;
 }
 
@@ -110,6 +110,14 @@ body {
   height: 20px;
   border: 1px solid #006652;
   border-radius: 3px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.major-legend-circle {
+  background-color: #ff0000;
+  border: 1px solid #660000;
+  border-radius: 50%;
   margin-right: 10px;
   flex-shrink: 0;
 }
